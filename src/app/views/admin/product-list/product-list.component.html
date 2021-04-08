@@ -1,0 +1,70 @@
+<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon" [link]="link"></app-page-title>
+
+<div class="card main-card mb-3">
+    <div class="card-header">
+        Danh sách danh mục sản phẩm
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Ảnh</th>
+                <th scope="col">Danh mục</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Giá khuyến mãi</th>
+                <th>
+                    <a class="mb-2 mr-2 btn-transition btn btn-outline-primary" routerLink="/admin/add-product">Thêm mới
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of products; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ p.name | titlecase}}</td>
+                <td>
+                    <img [src]="p.image" class="mr-2" width="40">
+                </td>
+                <td>{{p.category.name | titlecase}}</td>
+                <td><strong>{{p.price | currency: "VND" | lowercase}}</strong></td>
+                <td><strong>{{p.sale_price | currency: "VND" | lowercase}}</strong></td>
+                <td>
+                    <a href="javascript:;" class="btn btn-success">edit</a>
+                    <a href="javascript:;" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="mr-4 container">
+
+        <nav aria-label="Page navigation example d-flex align-items-center">
+            <div>
+                <label for="">Show</label>
+                <select>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <ul class="pagination justify-content-end">
+                <li class="page-item">
+                    <a class="page-link" href="javascript:;">Previous</a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link" href="javascript:;" >Previous</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link bg-primary text-white">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:;">Next</a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link" href="javascript:;">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

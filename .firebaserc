@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-image-gallery-f676d": {
+      "hosting": {
+        "architectui-angular-free": [
+          "angular-image-gallery-f676d"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
+
+<div class="main-card mb-3 card">
+  <div class="card-body">
+    <h5 class="card-title">{{title | titlecase}}</h5>
+    <form [formGroup]="cateForm" (ngSubmit)="saveCate()">
+      <div class="position-relative row form-group"><label for="exampleName" class="col-sm-2 col-form-label">Tên danh
+          mục</label>
+        <div class="col-sm-10"><input id="exampleName" formControlName="name" type="text" class="form-control">
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors.required">
+              Tên danh mục không bỏ trống!
+            </div>
+            <div *ngIf="name.errors.minlength">
+              Tên danh mục lớn hơn 4 ký tự!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="position-relative row form-group"><label for="exampleImage"
+          class="col-sm-2 col-form-label">Ảnh</label>
+        <div class="col-sm-10">
+          <input id="exampleImage" formControlName="image" type="text" class="form-control">
+            <div *ngIf="image.invalid && (image.dirty || image.touched)" class="alert alert-danger">
+              <div *ngIf="image.errors.required">
+                Ảnh không được bỏ trống
+              </div>
+              <div *ngIf="image.errors.pattern">
+                Ảnh không đúng định dạng
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="position-relative row form-group"><label for="exampleText" class="col-sm-2 col-form-label">Mô
+          tả</label>
+        <div class="col-sm-10">
+          <textarea id="exampleText" class="form-control" formControlName="desc"></textarea>
+          <div *ngIf="desc.invalid && (desc.dirty || desc.touched)" class="alert alert-danger">
+            <div *ngIf="desc.errors.required">
+              Mô tả không được bỏ trống
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="position-relative row form-check">
+        <div class="col-sm-10 offset-sm-2">
+          <button class="btn btn-success" [disabled]="!cateForm.valid">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <pre>
+    {{cateForm.value | json}}
+  </pre>
+</div>
