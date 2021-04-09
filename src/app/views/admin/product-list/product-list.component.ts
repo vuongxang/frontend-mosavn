@@ -30,4 +30,14 @@ export class ProductListComponent implements OnInit {
       this.products = res.data;
     })
   }
+
+  remove(id){
+    let conf = confirm("Bạn chắc chắn xóa");
+    if(conf){
+      this.productService.removeByid(id).subscribe(data=>{
+        this.getAllProducts();
+         this.route.navigate(['/admin/product-list']);
+      })
+    }
+  }
 }

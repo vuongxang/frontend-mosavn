@@ -30,8 +30,8 @@
                 <td><strong>{{p.price | currency: "VND" | lowercase}}</strong></td>
                 <td><strong>{{p.sale_price | currency: "VND" | lowercase}}</strong></td>
                 <td>
-                    <a href="javascript:;" class="btn btn-success">edit</a>
-                    <a href="javascript:;" class="btn btn-danger">Delete</a>
+                    <a href="javascript:;" class="btn btn-success" [routerLink]="['/admin/edit-product',p.id]">edit</a>
+                    <a href="javascript:;" class="btn btn-danger" (click)="remove(p.id)">Delete</a>
                 </td>
             </tr>
         </tbody>

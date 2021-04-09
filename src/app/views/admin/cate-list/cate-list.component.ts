@@ -67,6 +67,10 @@ export class CateListComponent implements OnInit {
     this.arr = [this.currentPage,this.pageSize];
     this.categoryService.getAll(this.arr).subscribe(res=>{
       this.cates = res.data;
+      this.currentPage = res.current_page;
+      this.totalPage = res.last_page;
+      this.pages = [];
+      for(let i=1;i<=this.totalPage;i++) this.pages.push(i)
     })
   }
 
@@ -74,6 +78,7 @@ export class CateListComponent implements OnInit {
     let conf = confirm("Bạn chắc chắn xóa");
     if(conf){
       this.categoryService.removeById(id).subscribe(data=>{
+        this.getAllCates();
          this.route.navigate(['/admin/categories']);
       })
     }
