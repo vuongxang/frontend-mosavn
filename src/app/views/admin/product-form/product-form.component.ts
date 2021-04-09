@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -23,6 +24,7 @@ export class ProductFormComponent implements OnInit {
   productForm = new FormGroup({
     id: new FormControl(null),
     cate_id: new FormControl(null),
+    category: new FormControl(''),
     name: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
@@ -56,11 +58,24 @@ export class ProductFormComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private route: Router,
+    private activeRoute: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
     this.getCates();
+    this.activeRoute.paramMap.subscribe(params =>{
+      let proId = params.get('proId');
+      if (proId) {
+        this.title = "Edit Form";
+        this.productService.findById(Number(proId)).subscribe(data => {
+          this.productForm.setValue(data);
+          this.getCates();
+          console.log(this.productForm.value);
+        })
+      }
+    })
   }
 
   getCates(){
@@ -72,7 +87,15 @@ export class ProductFormComponent implements OnInit {
 
   saveProduct(){
     if (this.productForm.valid){
-      console.log(this.productForm.value);
+      if (this.productForm.value.id != null) {
+        this.productService.editProduct(this.productForm.value).subscribe(data => {
+          this.route.navigate(['/admin/product-list']);
+        });
+      } else {
+        this.productService.addProduct(this.productForm.value).subscribe(data => {
+          this.route.navigate(['/admin/product-list']);
+        })
+      }
     }
   }
 

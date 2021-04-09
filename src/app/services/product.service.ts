@@ -16,8 +16,30 @@ export class ProductService {
     return this.http.get<any>(url);
   }
 
-  getAll(): Observable<any>{
-    let url = this.API_URL;
+  getAll(filter: any): Observable<any>{
+    let url = `${this.API_URL}?pagesize=${filter.pagesize}&page=${filter.currentPage}`;
+    switch(filter.orderBy){
+      case "1": 
+        url = `${url}&sort=created_at&order=desc`;
+        break;
+      case "2": 
+        url = `${url}&sort=price&order=asc`;
+        break;
+      case "3": 
+        url = `${url}&sort=price&order=desc`;
+        break;
+      case "4": 
+        url = `${url}&sort=name&order=asc`;
+        break;
+      case "5": 
+        url = `${url}&sort=name&order=desc`;
+        break;
+      default:
+        break;
+    }
+    if(filter.keyword.length > 0){
+      url= `${url}&keyword=${filter.keyword}`;
+    }
     return this.http.get<any>(url);
   }
 
