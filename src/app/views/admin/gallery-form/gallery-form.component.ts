@@ -10,6 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./gallery-form.component.sass']
 })
 export class GalleryFormComponent implements OnInit {
+  
   downloadURL: Observable<string>;
   
   constructor( private storage: AngularFireStorage ) { }

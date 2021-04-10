@@ -11,21 +11,22 @@
                 </div>
             </div>
             <div class="position-relative row form-group">
-                <label for="exampleImage" class="col-sm-2 col-form-label">Ảnh</label>
+                <label class="col-sm-2 col-form-label">Ảnh</label>
                 <div class="col-sm-10">
-                    <input id="exampleImage" type="text" class="form-control" formControlName="image">
+                    <img [src]="imageUrl" width="300px" class="img-thumbnail" (click)="fileUploader.click()">
+                    <input #fileUploader type="file" class="form-control" (change)="onFileSelected($event)">
                 </div>
             </div>
-            <div class="position-relative row form-group"><label for="exampleText" class="col-sm-2 col-form-label">Mô
+            <div class="position-relative row form-group"><label class="col-sm-2 col-form-label">Mô
                     tả ngắn</label>
                 <div class="col-sm-10">
-                    <textarea id="exampleText" class="form-control" formControlName="short_desc"></textarea>
+                    <textarea class="form-control" formControlName="short_desc"></textarea>
                 </div>
             </div>
             <div class="position-relative row form-group">
-                <label for="exampleText" class="col-sm-2 col-form-label">Content</label>
+                <label class="col-sm-2 col-form-label">Content</label>
                 <div class="col-sm-10">
-                    <textarea id="exampleText" class="form-control" formControlName="content"></textarea>
+                    <textarea class="form-control" formControlName="content"></textarea>
                 </div>
             </div>
             <div class="position-relative row form-group"><label for="exampleText"
@@ -39,15 +40,15 @@
             </div>
         </div>
         <div class="position-relative row form-group">
-            <label for="exampleName" class="col-sm-2 col-form-label">Giá sản phẩm</label>
+            <label for="examplePrice" class="col-sm-2 col-form-label">Giá sản phẩm</label>
             <div class="col-sm-10">
-                <input id="exampleName" type="number" class="form-control" formControlName="price">
+                <input id="examplePrice" type="number" class="form-control" formControlName="price">
             </div>
         </div>
         <div class="position-relative row form-group">
-            <label for="exampleName" class="col-sm-2 col-form-label">Giá khuyến mãi</label>
+            <label for="exampleSalePrice" class="col-sm-2 col-form-label">Giá khuyến mãi</label>
             <div class="col-sm-10">
-                <input id="exampleName" type="number" class="form-control" formControlName="sale_price">
+                <input id="exampleSalePrice" type="number" class="form-control" formControlName="sale_price">
             </div>
         </div>
             <div class="position-relative row form-check">

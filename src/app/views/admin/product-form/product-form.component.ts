@@ -4,6 +4,9 @@ import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { map, finalize } from "rxjs/operators";
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-product-form',
@@ -18,8 +21,10 @@ export class ProductFormComponent implements OnInit {
   link="/admin/add-product";
 
   title = "Add Form";
-
+  downloadURL: Observable<string>;
+  imageUrl: String = "https://png.pngtree.com/png-vector/20191129/ourmid/pngtree-image-upload-icon-photo-upload-icon-png-image_2047546.jpg"
   cates: Array<Category> = [];
+
 
   productForm = new FormGroup({
     id: new FormControl(null),
@@ -29,9 +34,7 @@ export class ProductFormComponent implements OnInit {
       Validators.required,
       Validators.minLength(4),
     ]),
-    image: new FormControl('', [
-      Validators.required
-    ]),
+    image: new FormControl(''),
     short_desc: new FormControl('', [
       Validators.required,
     ]),
@@ -60,7 +63,8 @@ export class ProductFormComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
     private route: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private storage: AngularFireStorage
     ) { }
 
   ngOnInit(): void {
@@ -72,10 +76,33 @@ export class ProductFormComponent implements OnInit {
         this.productService.findById(Number(proId)).subscribe(data => {
           this.productForm.setValue(data);
           this.getCates();
-          console.log(this.productForm.value);
+          this.imageUrl = this.productForm.value.image;
         })
       }
     })
+  }
+
+  onFileSelected(event){
+    var n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `Uploads/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`Uploads/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            this.imageUrl = url;
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          // console.log(url);
+        }
+      });
   }
 
   getCates(){
@@ -87,6 +114,7 @@ export class ProductFormComponent implements OnInit {
 
   saveProduct(){
     if (this.productForm.valid){
+      this.productForm.value.image = this.imageUrl;
       if (this.productForm.value.id != null) {
         this.productService.editProduct(this.productForm.value).subscribe(data => {
           this.route.navigate(['/admin/product-list']);
