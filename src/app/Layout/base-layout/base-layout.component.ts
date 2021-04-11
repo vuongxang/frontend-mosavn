@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {ConfigActions} from '../../ThemeOptions/store/config.actions';
 import {ThemeOptions} from '../../theme-options';
 import {animate, query, style, transition, trigger} from '@angular/animations';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-base-layout',
@@ -38,7 +40,18 @@ export class BaseLayoutComponent {
 
   @select('config') public config$: Observable<any>;
 
-  constructor(public globals: ThemeOptions, public configActions: ConfigActions) {
+  constructor(
+    public globals: ThemeOptions, 
+    public configActions: ConfigActions,
+    private router: Router,
+    private authenticationService: AuthenticationService
+    ) 
+  {
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/admin']);
+    }else{
+      this.router.navigate(['/login']);
+    }
   }
 
   toggleSidebarMobile() {
