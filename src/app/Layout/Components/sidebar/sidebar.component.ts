@@ -2,7 +2,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {ThemeOptions} from '../../../theme-options';
 import {select} from '@angular-redux/store';
 import {Observable} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class SidebarComponent implements OnInit {
   constructor(
     public globals: ThemeOptions, 
     private activatedRoute: ActivatedRoute,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private route: Router
     ) {
 
   }
@@ -60,5 +61,6 @@ export class SidebarComponent implements OnInit {
 
   logout(){
     this.authenticationService.logout();
+    this.route.navigate(['login']);
   }
 }

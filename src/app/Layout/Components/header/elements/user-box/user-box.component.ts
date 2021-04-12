@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import { User } from 'src/app/models/user';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import {ThemeOptions} from '../../../../../theme-options';
 
 @Component({
@@ -7,10 +9,18 @@ import {ThemeOptions} from '../../../../../theme-options';
 })
 export class UserBoxComponent implements OnInit {
 
-  constructor(public globals: ThemeOptions) {
+  currentUser: User = null;
+
+  constructor(
+    public globals: ThemeOptions,
+    private authenticationService: AuthenticationService
+    ) {
   }
 
   ngOnInit() {
+    if(this.authenticationService.currentUserValue){
+      this.currentUser = this.authenticationService.currentUserValue;
+    }
   }
 
 }
