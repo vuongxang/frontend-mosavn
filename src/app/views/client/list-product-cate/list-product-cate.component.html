@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <h2 class="text-center">Danh mục</h2>
+            <ul class="list-group" *ngFor="let c of cates">
+                <li class="list-group-item" aria-current="true" [ngClass]="{'active text-white': c.id===cate.id}">
+                    <a href="javascript:;" [routerLink]="['/product-cate',c.id]">{{c.name}}</a>
+                </li>
+              </ul>
+        </div>
+        <div class="col-8 mt-4 mb-4">
+            <h2 class="text-center">{{cate.name}}</h2>
+            <div class="row">
+                <div class="card col-3 border-0 p-2 text-center" *ngFor="let p of cate.products">
+                    <img [src]="p.image" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title text-center">{{p.name | titlecase}}</h5>
+                      <p class="card-text text-center"><del>{{p.price | currency: "VND" | lowercase}}</del></p>
+                      <p class="card-text text-center"><strong>{{p.sale_price | currency: "VND" | lowercase}}</strong></p>
+                      <a href="javascript:;" class="btn btn-outline-success" [routerLink]="['product-detail',p.id]">Chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

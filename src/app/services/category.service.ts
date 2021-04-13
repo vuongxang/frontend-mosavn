@@ -70,4 +70,9 @@ export class CategoryService {
         catchError(this.handleError)
       );
   } 
+
+  getAllCates(){
+    let url = `${this.API_URL}/list`;
+    return this.http.get<any>(url);
+  }
 }

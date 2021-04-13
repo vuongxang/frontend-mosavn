@@ -58,6 +58,11 @@ import { GalleryListComponent } from './views/admin/gallery-list/gallery-list.co
 import { GalleryFormComponent } from './views/admin/gallery-form/gallery-form.component';
 import { ProductListComponent } from './views/admin/product-list/product-list.component';
 import { ProductFormComponent } from './views/admin/product-form/product-form.component';
+import { ClientLayoutsComponent } from './client-layouts/client-layouts.component';
+import { HomePageComponent } from './views/client/home-page/home-page.component';
+import { ProductsComponent } from './views/client/products/products.component';
+import { ListProductCateComponent } from './views/client/list-product-cate/list-product-cate.component';
+import { ProductDetailComponent } from './views/client/product-detail/product-detail.component';
 
 const routes: Routes = [
   {
@@ -115,7 +120,25 @@ const routes: Routes = [
   //client
   {
     path: '',
-    component: ClientLayoutComponent,
+    component: ClientLayoutsComponent,
+    children: [
+      {
+        path:'',
+        component: HomePageComponent
+      },
+      {
+        path:'product-page',
+        component: ProductsComponent
+      },
+      {
+        path:'product-cate/:cateId',
+        component: ListProductCateComponent
+      },
+      {
+        path:'product-detail/:proId',
+        component: ProductDetailComponent
+      },
+    ]
   },
   // {
   //   path: '',

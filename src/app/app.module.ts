@@ -114,6 +114,12 @@ import { GalleryListComponent } from './views/admin/gallery-list/gallery-list.co
 import { GalleryFormComponent } from './views/admin/gallery-form/gallery-form.component';
 import { ProductListComponent } from './views/admin/product-list/product-list.component';
 import { ProductFormComponent } from './views/admin/product-form/product-form.component';
+import { ClientLayoutsComponent } from './client-layouts/client-layouts.component';
+import { HomePageComponent } from './views/client/home-page/home-page.component';
+import { ProductsComponent } from './views/client/products/products.component';
+import { ProductInitComponent } from './components/product-init/product-init.component';
+import { ListProductCateComponent } from './views/client/list-product-cate/list-product-cate.component';
+import { ProductDetailComponent } from './views/client/product-detail/product-detail.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -211,6 +217,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GalleryFormComponent,
     ProductListComponent,
     ProductFormComponent,
+    ClientLayoutsComponent,
+    HomePageComponent,
+    ProductsComponent,
+    ProductInitComponent,
+    ListProductCateComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

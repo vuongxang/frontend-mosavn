@@ -1,0 +1,85 @@
+<section>
+    <div class="container">
+        <div class="row mt-4 mb-4">
+            <div class="col-4 mt-4"><hr></div>
+            <div class="col-4"><h1 class="text-center">CHUYÊN MỤC</h1></div>
+            <div class="col-4 mt-4"><hr></div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <a href="javascript:;" routerLink="/product-page">
+                    <div class="card bg-dark text-white">
+                        <img src="./assets/images/banner/banner1.jpg" class="card-img" alt="...">
+                        <div class="card-img-overlay">
+                          <h4 class="card-title">SẢN PHẨM</h4>
+                        </div>
+                      </div>
+                </a>
+            </div>
+            <div class="col-3">
+                <div class="card bg-dark text-white">
+                    <img src="./assets/images/banner/banner2.jpg" class="card-img" alt="...">
+                    <div class="card-img-overlay">
+                      <h4 class="card-title">HƯỚNG DẪN</h4>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-3">
+                <div class="card bg-dark text-white">
+                    <img src="./assets/images/banner/banner3.jpg" class="card-img" alt="...">
+                    <div class="card-img-overlay">
+                      <h4 class="card-title">TIN TỨC</h4>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-3">
+                <div class="card bg-dark text-white text-center">
+                    <img src="./assets/images/banner/banner1.jpg" class="card-img" alt="...">
+                    <div class="card-img-overlay">
+                      <h4 class="card-title btn btn-danger">LIÊN HỆ</h4>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+  </section>
+  <!--End section category-->
+  <section>
+      <div class="container">
+        <div class="row mt-4 mb-4">
+            <div class="col-4 mt-4"><hr></div>
+            <div class="col-4"><h1 class="text-center">SẢN PHẨM</h1></div>
+            <div class="col-4 mt-4"><hr></div>
+        </div>
+        <div class="row">
+            <div class="card col-3 border-0 p-2 text-center" *ngFor="let p of products">
+                <img [src]="p.image" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">{{p.name | titlecase}}</h5>
+                  <p class="card-text text-center"><del>{{p.price | currency: "VND" | lowercase}}</del></p>
+                  <p class="card-text text-center"><strong>{{p.sale_price | currency: "VND" | lowercase}}</strong></p>
+                  <a href="javascript:;" class="btn btn-outline-success" [routerLink]="['product-detail',p.id]">Chi tiết</a>
+                </div>
+            </div>
+            <ul class="pagination justify-content-end">
+                <li class="page-item" *ngIf="filterObject.currentPage!=1">
+                    <a class="page-link" href="javascript:;" (click)="prevPage()">Previous</a>
+                </li>
+                <li class="page-item disabled" *ngIf="filterObject.currentPage==1">
+                    <a class="page-link" href="javascript:;" >Previous</a>
+                </li>
+                <li class="page-item" *ngFor="let it of pages">
+                    <a class="page-link" *ngIf="it!=filterObject.currentPage" (click)="changePage(it)">{{it}}</a>
+                    <a class="page-link bg-primary text-white" *ngIf="it==filterObject.currentPage">{{it}}</a>
+                </li>
+                <li class="page-item" *ngIf="filterObject.currentPage!=totalPage">
+                    <a class="page-link" href="javascript:;" (click)="nextPage()">Next</a>
+                </li>
+                <li class="page-item disabled" *ngIf="filterObject.currentPage==totalPage">
+                    <a class="page-link" href="javascript:;">Next</a>
+                </li>
+            </ul>
+        </div>
+      </div>
+  </section>
