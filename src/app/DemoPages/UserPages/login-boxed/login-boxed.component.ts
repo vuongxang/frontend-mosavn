@@ -15,7 +15,7 @@ export class LoginBoxedComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error = '';
+  errorMessage = '';
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -56,7 +56,9 @@ export class LoginBoxedComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.error = error;
+          
+          console.log(error.error.error);
+          this.errorMessage = error.error.error;
           this.loading = false;
         });
   }

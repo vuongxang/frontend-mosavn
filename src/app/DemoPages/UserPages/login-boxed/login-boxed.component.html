@@ -55,7 +55,7 @@
                 <button type="submit" class="btn btn-primary btn-lg" [disabled]="loading">
                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                   Login to Dashboard</button>
-                  <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                  <div *ngIf="errorMessage" class="alert alert-danger mt-3 mb-0">{{errorMessage}}</div>
               </div>
             </div>
           </div>

@@ -17,7 +17,7 @@
                       <h5 class="card-title text-center">{{p.name | titlecase}}</h5>
                       <p class="card-text text-center"><del>{{p.price | currency: "VND" | lowercase}}</del></p>
                       <p class="card-text text-center"><strong>{{p.sale_price | currency: "VND" | lowercase}}</strong></p>
-                      <a href="javascript:;" class="btn btn-outline-success" [routerLink]="['product-detail',p.id]">Chi tiết</a>
+                      <a href="javascript:;" class="btn btn-outline-success" [routerLink]="['/product-detail',p.id]">Chi tiết</a>
                     </div>
                 </div>
             </div>
