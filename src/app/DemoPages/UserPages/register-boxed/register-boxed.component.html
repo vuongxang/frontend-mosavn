@@ -4,59 +4,99 @@
       <div class="app-logo-inverse mx-auto mb-3"></div>
       <div class="modal-dialog w-100">
         <div class="modal-content">
-          <div class="modal-body">
-            <h5 class="modal-title">
-              <h4 class="mt-2">
-                <div>Welcome,</div>
-                <span>It only takes a <span class="text-success">few seconds</span> to create your account</span></h4>
-            </h5>
-            <div class="divider"></div>
-            <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_"
-                 class="form-group">
-              <div><input id="exampleInput1" type="email" placeholder="Enter email..." required="required"
-                          aria-required="true" class="form-control"
-                          aria-describedby="exampleInputGroup1__BV_description_">
-                <small tabindex="-1" id="exampleInputGroup1__BV_description_" class="form-text text-muted">We'll never
-                  share your email with anyone else.
-                </small>
-              </div>
-            </div>
-            <div id="exampleInputGroup12" role="group" class="form-group">
-              <div><input id="exampleInput12" type="text" placeholder="Enter username..." required="required"
-                          aria-required="true" class="form-control"></div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div id="exampleInputGroup2" role="group" class="form-group">
-                  <div><input id="exampleInput2" type="password" placeholder="Enter password..." required="required"
-                              aria-required="true" class="form-control"></div>
+          <form [formGroup]="registerForm" (submit)="submitForm($event)">
+            <div class="modal-body">
+              <h5 class="modal-title">
+                <h4 class="mt-2">
+                  <div>Xin chào!</div>
+                  <span>Đơn giản chỉ mất <span class="text-success">vài giây</span> Để tạo tài khoản mới</span>
+                </h4>
+              </h5>
+              <div class="divider"></div>
+              <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_"
+                class="form-group">
+                <div>
+                  <input id="exampleInput1" type="email" placeholder="Enter email..." required="required"
+                    formControlName="email" aria-required="true" class="form-control"
+                    aria-describedby="exampleInputGroup1__BV_description_">
+                  <small tabindex="-1" id="exampleInputGroup1__BV_description_" class="form-text text-muted">
+                    Chúng tôi sẽ không chia sẻ thông tin cá nhân của bạn với bất cứ ai
+                  </small>
+                  <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="alert alert-danger">
+                    <div *ngIf="f.email.errors?.required">
+                      Email không bỏ trống
+                    </div>
+                    <div *ngIf="f.email.errors?.email">
+                      Email không đúng định dạng
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div id="exampleInputGroup2" role="group" class="form-group">
-                  <div><input id="exampleInput2" type="password" placeholder="Repeat password..." required="required"
-                              aria-required="true" class="form-control"></div>
+              <div id="exampleInputGroup12" role="group" class="form-group">
+                <div>
+                  <input id="exampleInput12" type="text" placeholder="Enter username..." required="required"
+                    formControlName="name" aria-required="true" class="form-control">
+                    <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)" class="alert alert-danger">
+                      <div *ngIf="f.name.errors?.required">
+                        Tên không bỏ trống
+                      </div>
+                      <div *ngIf="f.name.errors?.minlength">
+                        Tên tối thiểu 4 ký tự
+                      </div>
+                    </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div id="exampleInputGroup2" role="group" class="form-group">
+                    <div>
+                      <input id="exampleInput2" type="password" placeholder="Enter password..." required="required"
+                        formControlName="password" aria-required="true" class="form-control">
+                    </div>
+                    <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)" class="alert alert-danger">
+                      <div *ngIf="f.password.errors?.required">
+                        Password không bỏ trống
+                      </div>
+                      <div *ngIf="f.password.errors?.minlength">
+                        Password tối thiểu 8 ký tự
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div id="exampleInputGroup2" role="group" class="form-group">
+                    <div>
+                      <input id="exampleInput2" type="password" placeholder="Repeat password..." required="required"
+                        formControlName="password_confirmation" aria-required="true" class="form-control">
+                    </div>
+                    <div *ngIf="f.password_confirmation.invalid && (f.password_confirmation.dirty || f.password_confirmation.touched)" class="alert alert-danger">
+                      <div *ngIf="f.password_confirmation.errors?.required">
+                        Repeat password không bỏ trống
+                      </div>
+                      <div *ngIf="f.password_confirmation.errors?.minlength">
+                        Repeat password tối thiểu 8 ký tự
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="divider"></div>
+              <h6 class="mb-0">
+                Bạn đã có tài khoản?
+                <a [routerLink]="['/login']" class="text-primary">Đăng nhập</a>
+                |
+                <a [routerLink]="" class="text-primary">Khôi phục mật khẩu</a>
+              </h6>
             </div>
-            <div class="custom-control custom-checkbox"><input id="exampleCheck" type="checkbox" name="check"
-                                                               autocomplete="off" class="custom-control-input"
-                                                               value="true"><label for="exampleCheck"
-                                                                                   class="custom-control-label">
-              Accept our <a [routerLink]="">Terms and Conditions</a>.
-            </label></div>
-            <div class="divider"></div>
-            <h6 class="mb-0">
-              Already have an account?
-              <a [routerLink]="" class="text-primary">Sign in</a>
-              |
-              <a [routerLink]="" class="text-primary">Recover
-                Password</a></h6></div>
-          <div class="modal-footer d-block text-center">
-            <button  type="button"
-                    class="btn btn-wide btn-pill btn-shadow btn-hover-shine btn-secondary btn-lg">Create Account
-            </button>
-          </div>
+            <div class="modal-footer d-block text-center">
+              <button type="submit" 
+              [disabled]="registerForm.invalid"
+              class="btn btn-wide btn-pill btn-shadow btn-hover-shine btn-danger btn-lg">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Tạo tài khoản
+              </button>
+            </div>
+          </form>
         </div>
       </div>
       <div class="text-center text-white opacity-8 mt-3">

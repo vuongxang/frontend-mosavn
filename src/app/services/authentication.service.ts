@@ -31,6 +31,10 @@ export class AuthenticationService {
             }));
     }
 
+    register(dataObj){
+        let url = `${this.API_URL}/register`;
+        return this.http.post(url,dataObj);
+    }
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
