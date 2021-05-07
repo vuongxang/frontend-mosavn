@@ -1,0 +1,14 @@
+<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon" [link]="link"></app-page-title>
+
+<div class="card main-card mb-3">
+    <div class="card-header">
+        Ảnh chi tiết sản phẩm: <strong>{{product.name | titlecase}}</strong>
+    </div>
+    <div>
+        <ng-container *ngFor="let g of product.product_gallaries" >
+            <img [src]="g.image" class="img-thumbnail" width="100">
+            <button class="btn-x" (click)="removeImage(g.id)">X</button>
+        </ng-container>
+        <input type="file" (change)="onFileSelected($event)">
+    </div>
+</div>

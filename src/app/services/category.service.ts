@@ -3,6 +3,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Category } from '../models/category';
+import { AuthenticationService } from './authentication.service';
+import { User } from '../models/user';
 
 
 @Injectable({
@@ -12,6 +14,7 @@ import { Category } from '../models/category';
 export class CategoryService {
   // private API_URL = 'https://6065dc19b8fbbd00175678fd.mockapi.io/categories';
   private API_URL = 'http://localhost:8000/api/category';
+  private token = '';
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -31,10 +34,22 @@ export class CategoryService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`,
     })
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authenticationService: AuthenticationService
+    ) {
+      this.token = this.authenticationService.currentUserValue.token;
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.token}`,
+        })
+      }
+     }
 
   getCateById(id: Number): Observable<any> {
     let url = `${this.API_URL}/${id}`;
@@ -45,6 +60,7 @@ export class CategoryService {
   }
   getAll(num: Array<any>): Observable<any> {
     let url = `${this.API_URL}/?page=${num[0]}&&pagesize=${num[1]}`;
+    console.log(this.httpOptions);
     return this.http.get < any > (url,this.httpOptions);
   }
 

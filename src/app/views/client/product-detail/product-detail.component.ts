@@ -10,6 +10,8 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductDetailComponent implements OnInit {
 
+  imgUrl = '';
+
   product: Product = {
     id: null,
     name: "",
@@ -19,7 +21,6 @@ export class ProductDetailComponent implements OnInit {
     sale_price: null,
     short_desc: "",
     content: "",
-
   };
   constructor(
     private activeRoute: ActivatedRoute,
@@ -32,10 +33,14 @@ export class ProductDetailComponent implements OnInit {
       if (proId) {
         this.productService.findById(Number(proId)).subscribe(data => {
           this.product = data;
-          console.log(this.product);
+          this.imgUrl = this.product.image;
         })
       }
     })
+  }
+
+  changeImgUrl(imgUrl){
+    this.imgUrl = imgUrl;
   }
 
 }

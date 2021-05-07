@@ -29,6 +29,7 @@
                 <th scope="col">Danh mục</th>
                 <th scope="col">Giá</th>
                 <th scope="col">Giá khuyến mãi</th>
+                <th scope="col">Galary</th>
                 <th>
                     <a class="mb-2 mr-2 btn-transition btn btn-outline-primary" routerLink="/admin/add-product">Thêm mới
                     </a>
@@ -45,6 +46,9 @@
                 <td>{{p.category.name | titlecase}}</td>
                 <td><strong>{{p.price | currency: "VND" | lowercase}}</strong></td>
                 <td><strong>{{p.sale_price | currency: "VND" | lowercase}}</strong></td>
+                <td>
+                    <a href="javascript:;" class="btn btn-light" [routerLink]="['/admin/edit-product-galery',p.id]" >Galery</a>
+                </td>
                 <td>
                     <a href="javascript:;" class="btn btn-success" [routerLink]="['/admin/edit-product',p.id]">edit</a>
                     <a href="javascript:;" class="btn btn-danger" (click)="remove(p.id)">Delete</a>

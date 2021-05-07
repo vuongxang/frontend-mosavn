@@ -120,6 +120,7 @@ import { ProductsComponent } from './views/client/products/products.component';
 import { ProductInitComponent } from './components/product-init/product-init.component';
 import { ListProductCateComponent } from './views/client/list-product-cate/list-product-cate.component';
 import { ProductDetailComponent } from './views/client/product-detail/product-detail.component';
+import { ProductGaleryComponent } from './views/admin/product-galery/product-galery.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -223,6 +224,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProductInitComponent,
     ListProductCateComponent,
     ProductDetailComponent,
+    ProductGaleryComponent,
   ],
   imports: [
     BrowserModule,

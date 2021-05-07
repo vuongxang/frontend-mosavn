@@ -4,5 +4,6 @@ export class User {
     email: string;
     password: string;
     avatar: string;
+    is_admin?: number;
     token?: string;
 }

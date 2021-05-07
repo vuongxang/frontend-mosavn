@@ -63,6 +63,7 @@ import { HomePageComponent } from './views/client/home-page/home-page.component'
 import { ProductsComponent } from './views/client/products/products.component';
 import { ListProductCateComponent } from './views/client/list-product-cate/list-product-cate.component';
 import { ProductDetailComponent } from './views/client/product-detail/product-detail.component';
+import { ProductGaleryComponent } from './views/admin/product-galery/product-galery.component';
 
 const routes: Routes = [
   {
@@ -114,6 +115,10 @@ const routes: Routes = [
       {
         path: 'edit-product/:proId', 
         component: ProductFormComponent,
+      },
+      {
+        path: 'edit-product-galery/:proId', 
+        component: ProductGaleryComponent,
       },
     ]
   },

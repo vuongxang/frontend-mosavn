@@ -47,8 +47,14 @@ export class BaseLayoutComponent {
     private authenticationService: AuthenticationService
     ) 
   {
+    console.log(this.authenticationService.currentUserValue);
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/admin']);
+      if(this.authenticationService.currentUserValue.is_admin===1){
+        this.router.navigate(['/admin']);
+      }else{
+        this.router.navigate(['']);
+      }
+
     }else{
       this.router.navigate(['/login']);
     }

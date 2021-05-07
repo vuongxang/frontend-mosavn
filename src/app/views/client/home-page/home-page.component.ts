@@ -36,6 +36,7 @@ export class HomePageComponent implements OnInit {
     this.productService.getAll(this.filterObject).subscribe(res =>{
       
       this.products = res.data;
+      console.log(this.products);
       this.totalPage = res.last_page;
       if(this.pages.length==0){
         for(let i=1;i<=this.totalPage;i++) this.pages.push(i)

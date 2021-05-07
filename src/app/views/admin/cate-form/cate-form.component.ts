@@ -31,6 +31,7 @@ export class CateFormComponent implements OnInit {
     desc: new FormControl('', [
       Validators.required,
     ]),
+    products: new FormControl(''),
     created_at: new FormControl(''),
     updated_at: new FormControl(''),
   });

@@ -33,7 +33,6 @@ export class ListProductCateComponent implements OnInit {
       if (cateId) {
         this.categoryService.getCateById(Number(cateId)).subscribe(data => {
           this.cate = data;
-          console.log(this.cate);
         })
       }
     })

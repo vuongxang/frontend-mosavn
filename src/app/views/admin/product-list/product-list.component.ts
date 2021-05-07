@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation  } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { ORDER_DATA } from 'src/app/mock-data/ORDER_DATA';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.sass']
+  styleUrls: ['./product-list.component.sass'],
+  providers: [NgbModalConfig, NgbModal]
 })
 export class ProductListComponent implements OnInit {
   heading = "Thêm sản phẩm";
@@ -29,8 +31,13 @@ export class ProductListComponent implements OnInit {
   constructor(
     private route: Router,
     private productService: ProductService,
+    config: NgbModalConfig,
+    private modalService: NgbModal
 
-  ) { }
+  ) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   ngOnInit(): void {
     this.getAllProducts();
